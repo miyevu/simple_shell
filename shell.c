@@ -2,22 +2,33 @@
 
 /**
  * main - implementation of shell, entry point
+ * @argc: argument count
+ * @argv: argument vector
  *
  * Return: 0 on success, exits on failure or returns 1
  */
-int main(void)
+int main(int argc __attribute__((unused)), char *argv[])
 {
-	char *buffer;
-	size_t buffer_size;
 
-	buffer = NULL;
-	buffer_size = 0;
+	int sig = 0;
+	char *line_read = NULL;
+	char **entry = NULL;
+
 	while (1)
 	{
-		my_print("#cisfun$ ");
-		get_input(&buffer, &buffer_size);
-		exec(buffer);
-		buffer = NULL;
+		if (isatty(STDIN_FILENO))
+			my_print("#cisfun$ ");
+		line_read = get_input();
+		if (line_read == NULL)
+		{
+			if (isatty(STDIN_FILENO))
+				my_print("\n");
+			return (sig);
+		}
+		entry = get_token(line_read);
+		if (entry == NULL)
+			continue;
+		sig = exec(entry, argv);
 	}
 	return (0);
 }

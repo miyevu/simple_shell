@@ -6,7 +6,7 @@
  *
  * Return: no return value
  */
-void my_print(const char *message)
+void my_print(char *message)
 {
-	write(1, message, strlen(message));
+	write(1, message, _strlen(message));
 }

@@ -2,21 +2,22 @@
 
 /**
  * get_input - get user input
- * @ptr: stores address of buffer
- * @ptrn: stores address of number
  *
  * Return: no return value
  */
-void get_input(char **ptr, size_t *ptrn)
+char *get_input(void)
 {
 	ssize_t bytes_read;
+	char *buffer = NULL;
+	size_t n = 0;
 
-	bytes_read = getline(ptr, ptrn, stdin);
+	bytes_read = getline(&buffer, &n, stdin);
 	if (bytes_read == -1)
 	{
-		free(*ptr);
-		exit(EXIT_FAILURE);
+		free(buffer);
+		return (NULL);
 	}
-	if ((*ptr)[bytes_read - 1] == '\n')
-		(*ptr)[bytes_read - 1] = '\0';
+	if (buffer[bytes_read - 1] == '\n')
+		buffer[bytes_read - 1] = '\0';
+	return (buffer);
 }

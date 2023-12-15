@@ -2,15 +2,15 @@
 
 /**
  * exec - executes a file
- * @pathname: path string
+ * @entry: command from user
+ * @argv: argument vector
  *
- * Return: no return value
+ * Return: 0 on success
  */
-void exec(char *pathname)
+int exec(char **entry, char *argv[])
 {
-	int value;
+	int value, status;
 	pid_t child;
-	char *argv[] = {NULL};
 
 	child = fork();
 	if (child == -1)
@@ -19,13 +19,15 @@ void exec(char *pathname)
 	}
 	else if (child == 0)
 	{
-		value = execve(pathname, argv, NULL);
+		value = execve(entry[0], entry, environ);
 		if (value == -1)
-			perror("./shell");
+			perror(argv[0]);
+		free_array(entry);
 	}
 	else
 	{
-		wait(NULL);
+		waitpid(child, &status, 0);
+		free_array(entry);
 	}
-	free(pathname);
+	return (0);
 }
