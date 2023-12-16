@@ -8,7 +8,7 @@
  */
 char *get_filename(char *arg)
 {
-	char *str = NULL, *token = NULL, *last_token, *mod_token = NULL;
+	char *str = NULL, *token = NULL, *last_token = NULL, *mod_token = NULL;
 	size_t i, len;
 	int j;
 
@@ -24,6 +24,9 @@ char *get_filename(char *arg)
 	if (mod_token == NULL)
 	{
 		perror("Malloc failed");
+		free(str);
+		str = NULL;
+		return (NULL);
 	}
 	/*inserting character at first position*/
 	*mod_token = '/';

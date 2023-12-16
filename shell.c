@@ -9,7 +9,7 @@
  */
 int main(int argc __attribute__((unused)), char *argv[])
 {
-
+	int i;
 	int sig = 0;
 	char *line_read = NULL;
 	char **entry = NULL;
@@ -28,6 +28,8 @@ int main(int argc __attribute__((unused)), char *argv[])
 		entry = get_token(line_read);
 		if (entry == NULL)
 			continue;
+		for (i = 0; entry[i] != NULL; i++)
+			printf("%s\n", entry[i]);
 		sig = exec(entry, argv);
 	}
 	return (0);
