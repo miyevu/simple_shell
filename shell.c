@@ -9,8 +9,7 @@
  */
 int main(int argc __attribute__((unused)), char *argv[])
 {
-	int i;
-	int sig = 0;
+	int sig = 0, index = 0;
 	char *line_read = NULL;
 	char **entry = NULL;
 
@@ -25,12 +24,11 @@ int main(int argc __attribute__((unused)), char *argv[])
 				my_print("\n");
 			return (sig);
 		}
+		index += 1;
 		entry = get_token(line_read);
 		if (entry == NULL)
 			continue;
-		for (i = 0; entry[i] != NULL; i++)
-			printf("%s\n", entry[i]);
-		sig = exec(entry, argv);
+		sig = exec(entry, argv, index);
 	}
 	return (0);
 }
