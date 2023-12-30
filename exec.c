@@ -4,6 +4,7 @@
  * exec - executes a file
  * @entry: command from user
  * @argv: argument vector
+ * @index: number of iterations
  *
  * Return: 0 on success
  */

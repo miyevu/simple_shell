@@ -27,7 +27,7 @@ char *search_file(char *str)
 	dir = strtok(value, ":");
 	while (dir != NULL)
 	{
-		len = _strlen(dir) + _strlen(str) + 1;
+		len = _strlen(dir) + _strlen(str) + 2;
 		full_path = malloc(len);
 		if (full_path != NULL)
 		{
@@ -37,7 +37,6 @@ char *search_file(char *str)
 			if (stat(full_path, &st) == 0)
 			{
 				free(value);
-				printf("%s\n", full_path);
 				return (full_path);
 			}
 			free(full_path);

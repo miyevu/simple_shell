@@ -21,6 +21,9 @@ void free_array(char **ptr)
 
 /**
  * error_handler - handles error
+ * @name: name of executable
+ * @input: command entered
+ * @index: iteration number
  *
  * return: no return value
  */

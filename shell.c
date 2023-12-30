@@ -28,7 +28,11 @@ int main(int argc __attribute__((unused)), char *argv[])
 		entry = get_token(line_read);
 		if (entry == NULL)
 			continue;
-		sig = exec(entry, argv, index);
+
+		if (is_builtin(entry[0]) == 1)
+			handle_builtin(entry, &sig);
+		else
+			sig = exec(entry, argv, index);
 	}
 	return (0);
 }

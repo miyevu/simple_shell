@@ -12,24 +12,26 @@
 
 extern char **environ;
 
+/*built-in*/
+void handle_builtin(char **entry, int *sig);
+int is_builtin(char *entry);
+void _env(char **entry, int *sig);
+void exit_shell(char **entry, int *sig);
+
 /*function prototypes*/
 void my_print(char *message);
 void print_to_error(char *str);
 char *get_input(void);
 char **assignment(int strnum, char *str);
 char **get_token(char *line_read);
-void free_array(char **ptr);
 int exec(char **entry, char **argv, int index);
 char *_getenv(char *name);
 char *search_file(char *str);
-void error_handler(char *name, char *input, int index);
 
-/*support function prototypes*
-void sup(char *ptr1, char *ptr2, char **ptr3);
-void sup2(char *ptr1, char **ptr2);
-void search_sup(char *ptr1, char *ptr2);
-void check_for_null(char *str);
-*/
+/*Utility*/
+void error_handler(char *name, char *input, int index);
+void free_array(char **ptr);
+
 /*string handlers*/
 char *_strdup(char *str);
 int _strlen(char *s);
